@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Семена</title>
+	<link rel="icon" type="image/png" href="../../../tree.svg" />
+	<script src="../../dist/Chart.min.js"></script>
+	<script src="../utils.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		.menu {
+			float: left;
+			width: 25%;
+		}
+
+		.menuitem {
+			padding: 8px;
+			margin-top: 7px;
+			border-bottom: 1px solid #f1f1f1;
+		}
+
+		.main {
+			float: left;
+			width: 55%;
+			padding: 0 20px;
+			overflow: hidden;
+		}
+
+		.right {
+			background-color: lightgreen;
+			float: left;
+			width: 20%;
+			padding: 10px 15px;
+			margin-top: 7px;
+		}
+
+		.wrapper {
+			max-width: 1280px;
+			margin: auto;
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+		}
+
+		.footer {
+			margin-top: auto;
+		}
+
+		#canvas-holder {
+			margin: auto;
+		}
+
+		@media only screen and (max-width: 800px) {
+
+			/* For tablets: */
+			.main {
+				width: 80%;
+				padding: 0;
+			}
+
+			.right {
+				width: 100%;
+			}
+		}
+
+		@media only screen and (max-width: 500px) {
+
+			/* For mobile phones: */
+			.menu,
+			.main,
+			.right {
+				width: 100%;
+			}
+		}
+	</style>
+</head>
+
+<body style="font-family:Verdana,sans-serif;margin:0;">
+	<div class="wrapper">
+		<div style="background-color:lightgray;padding:15px;">
+			<h1>Дачные дела</h1>
+			<h3>Сайт для всех, кто любит работать в саду</h3>
+		</div>
+
+		<div id="canvas-holder" style="width:100%">
+			<canvas id="chart-area"></canvas>
+		</div>
+		<!-- <button id="randomizeData">Randomize Data</button>
+	<button id="addDataset">Add Dataset</button>
+	<button id="removeDataset">Remove Dataset</button> -->
+		<script>
+			var randomScalingFactor = function () {
+				return Math.round(Math.random() * 100);
+			};
+
+			var config = {
+				type: 'pie',
+				data: {
+					datasets: [{
+						data: [
+							10,
+							17,
+							47,
+							6,
+							20,
+						],
+						backgroundColor: [
+							window.chartColors.red,
+							window.chartColors.orange,
+							window.chartColors.yellow,
+							window.chartColors.green,
+							window.chartColors.blue,
+						],
+						label: 'Dataset 1'
+					}],
+					labels: [
+						'Фрукты',
+						'Овощи',
+						'Ягоды',
+						'Цветы',
+						'Деревья'
+					]
+				},
+				options: {
+					responsive: true
+				}
+			};
+
+			window.onload = function () {
+				var ctx = document.getElementById('chart-area').getContext('2d');
+				window.myPie = new Chart(ctx, config);
+			};
+
+			document.getElementById('randomizeData').addEventListener('click', function () {
+				config.data.datasets.forEach(function (dataset) {
+					dataset.data = dataset.data.map(function () {
+						return randomScalingFactor();
+					});
+				});
+
+				window.myPie.update();
+			});
+
+			var colorNames = Object.keys(window.chartColors);
+			document.getElementById('addDataset').addEventListener('click', function () {
+				var newDataset = {
+					backgroundColor: [],
+					data: [],
+					label: 'New dataset ' + config.data.datasets.length,
+				};
+
+				for (var index = 0; index < config.data.labels.length; ++index) {
+					newDataset.data.push(randomScalingFactor());
+
+					var colorName = colorNames[index % colorNames.length];
+					var newColor = window.chartColors[colorName];
+					newDataset.backgroundColor.push(newColor);
+				}
+
+				config.data.datasets.push(newDataset);
+				window.myPie.update();
+			});
+
+			document.getElementById('removeDataset').addEventListener('click', function () {
+				config.data.datasets.splice(0, 1);
+				window.myPie.update();
+			});
+		</script>
+		<div style="background-color:#f1f1f1;text-align:center;padding:10px;margin-top:7px;font-size:12px;" class="footer"> 
+			Copyright 2020 Shcherbinin Dmitry
+		</div>
+	</div>
+</body>
+
+</html>

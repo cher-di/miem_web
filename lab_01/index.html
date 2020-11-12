@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Дачные дела</title>
+    <link rel="icon" type="image/png" href="tree.svg"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .menu {
+            float: left;
+            width: 25%;
+        }
+
+        .menuitem {
+            padding: 8px;
+            margin-top: 7px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .main {
+            float: left;
+            width: 55%;
+            padding: 0 20px;
+            overflow: hidden;
+        }
+
+        .right {
+            background-color: lightgreen;
+            float: left;
+            width: 20%;
+            padding: 10px 15px;
+            margin-top: 7px;
+        }
+
+        .wrapper {
+            max-width: 1280px;
+            margin: auto;
+        }
+
+        @media only screen and (max-width: 800px) {
+            /* For tablets: */
+            .main {
+                width: 80%;
+                padding: 0;
+            }
+
+            .right {
+                width: 100%;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            /* For mobile phones: */
+            .menu, .main, .right {
+                width: 100%;
+            }
+        }
+    </style>
+    <script>
+        function MultiplyAll() {
+            var myform = document.forms.myform;
+            var h = parseFloat(myform.h.value);
+            var d = parseFloat(myform.d.value);
+            var value = h * (d / 2) * (d / 2) * 3.14;
+            
+            if (!myform.half.checked) {
+                myform.res.value = value;
+            }
+            else {
+                myform.res.value = value / 2;
+            }   
+        }
+    </script>
+</head>
+<body style="font-family:Verdana,sans-serif;">
+<div class="wrapper">
+    <div style="background-color:lightgray;padding:15px;">
+        <h1>Дачные дела</h1>
+        <h3>Сайт для всех, кто любит работать в саду</h3>
+    </div>
+    <div style="overflow:auto">
+        <div class="menu">
+            <div class="menuitem"><a href="charts/samples/charts/pie.html">Семена</a></div>
+            <div class="menuitem"><a href="#">Новости</a></div>
+            <div class="menuitem"><a href="#">Магазин</a></div>
+            <div class="menuitem"><a href="#">Форум</a></div>
+            <div class="menuitem"><a href="site/samples/blockEditor.html">План сайта</a></div>
+            <!--img src="clay.jpg" width="100%" alt="Stick your fingers"></img-->
+        </div>
+        <div class="main">
+            <h2>О сайте</h2>
+            <p align="justify">Любите работать на даче и приятно проводить время на свежем воздухе? <b>Тогда этот сайт для вас!</b></p>
+            <p align="justify">
+                На данном ресурсе вы можете найти информацию о садово-огородных работах по итересующей вас теме.<br>
+                Данный список включает лишь немногое, что вы можете здесь найти:
+            </p>
+            <p>
+                <ul>
+                    <li>Описание различных растений в разделе <a href="#">семена</a></li>
+                    <li>Почитать <a href="#">новости</a></li>
+                    <li>В нашем <a href="#">магазине</a> вы можете найти интересующие вас садовые принадлежности</li>
+                    <li>Вы можете обсудить все интересующие вас вопросы на нашем <a href="#">форуме</a></li>
+                </ul>
+            </p>
+            <img src="house.jpg" style="width:100%" alt="Возникла проблема с загрузкой картинки">
+        </div>
+        <div class="right">
+            <h2>Огромное сообщество дачников</h2>
+            <p>Делитесь своими мыслями и успехами в дачном поприще</p>
+            <h2>Широкий ассортимент садовых товаров</h2>
+            <p>Вы можете найти в нашем магазине всё: от граблей до садовых гномов</p>
+            <h2>Всегда на волне новых тенденций</h2>
+            <p>Следите в новостях за новыми веяниями в дачных вопросах</p>
+            <p><b>Расчёт объёма бочки</b><br>
+                <form method=post id="myform">
+                    <label>Высота:<input type="text" name="h" /><br></label>
+                    <label>Диаметр:<input type="text" name="d" /> <br></label>
+                    <label>Половину<input type="checkbox", name="half" unchecked> <br></label>
+                    <input type="button" name="sum" value="РАСЧЁТ" onClick="MultiplyAll()" />
+                    <br>Результат:<br><input type="text" readonly="readonly" id="res" name="res" />
+                </form>
+            </p>
+        </div>
+    </div>
+    <div style="background-color:#f1f1f1;text-align:center;padding:10px;margin-top:7px;font-size:12px;"> 
+        Copyright 2020 Shcherbinin Dmitry
+    </div>
+</div>
+</body>
+</html>
